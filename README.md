@@ -1,14 +1,14 @@
-# Nerfies
+# The Devil is in the Cross-Attention: Improving Complex Non-rigid Image Editing Faithfulness via Attention Synergy
 
-This is the repository that contains source code for the [Nerfies website](https://nerfies.github.io).
+This is the repository that contains source code for the **Attention Synergy** project page.
 
-If you find Nerfies useful for your work please cite:
+If you find this work useful for your research, please cite:
 ```
-@article{park2021nerfies
-  author    = {Park, Keunhong and Sinha, Utkarsh and Barron, Jonathan T. and Bouaziz, Sofien and Goldman, Dan B and Seitz, Steven M. and Martin-Brualla, Ricardo},
-  title     = {Nerfies: Deformable Neural Radiance Fields},
-  journal   = {ICCV},
-  year      = {2021},
+@article{author2026attention,
+  author    = {Author, One and Author, Two},
+  title     = {The Devil is in the Cross-Attention: Improving Complex Non-rigid Image Editing Faithfulness via Attention Synergy},
+  journal   = {arXiv preprint},
+  year      = {2026},
 }
 ```
 

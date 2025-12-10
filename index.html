@@ -159,7 +159,7 @@
       </div>
       <div class="content has-text-justified">
         <p>
-          The editing results produced by our proposed attention synergy mechanism, <strong>SynPS</strong>. Our method achieves complex training-free non-rigid edits, including challenging tasks such as animal and human pose transformations, image layout transformations, object interactions, and even fine-grained typography editing. The source images are highlighted by red bounding boxes.
+          <b>Figure 1:</b> The editing results produced by our proposed attention synergy mechanism, <strong>SynPS</strong>. Our method achieves complex training-free non-rigid edits, including challenging tasks such as animal and human pose transformations, image layout transformations, object interactions, and even fine-grained typography editing. The source images are highlighted by red bounding boxes.
         </p>
       </div>
     </div>
@@ -223,11 +223,11 @@
             Existing methods [1, 2] have investigated the use of fixed attention blocks for attention sharing. However, such issues still persist in the edited results due to emphasis on <em>positional embeddings</em>. Meanwhile, [3] adjusts position embeddings based on the correspondence between the source image and the pre-generated target image, where the structure is determined by the target prompt. This often leads to cases where the source information is entirely neglected due to the reliance on target <em>semantics</em>. This motivates us to investigate the balance between the positional signals of the source and semantics from the target prompt in the attention sharing process.
           </p>
           <div style="text-align: center;">
-            <img src="./static/intro.png" alt="Attention Collapse Problem" style="width: 100%; margin-bottom: 20px;" />
+            <img src="./static/intro.png" alt="Attention Collapse Problem" style="width: 100%;" />
           </div>
           <div class="content has-text-justified">
             <p>
-              Figure 2: Qualitative comparison on the editing instruction "upright &rightarrow; white knocked". (b) Initialized with the same noise as the source image, the target image is generated using FLUX with default settings conditioned on the target prompt, thereby fully following the textual instruction. (c) FreeFlux produces noticeable <em>duplicate artifacts</em> and fails to achieve the intended edit. (d) and (e) show the results of CharaConsist and attention sharing w/o RoPE, respectively. Although the overall structure follows the target prompt, the source color and texture are not well preserved (i.e., <em>dominated by the prompt</em>), due to the inaccurate correspondences in CharaConsist and semantic confusion in the <em>w/o</em> RoPE setting. (f) Our method better preserves the source appearance while faithfully following the target prompt.
+              <b>Figure 2:</b> Qualitative comparison on the editing instruction "upright &rightarrow; white knocked". (b) Initialized with the same noise as the source image, the target image is generated using FLUX with default settings conditioned on the target prompt, thereby fully following the textual instruction. (c) FreeFlux produces noticeable <em>duplicate artifacts</em> and fails to achieve the intended edit. (d) and (e) show the results of CharaConsist and attention sharing w/o RoPE, respectively. Although the overall structure follows the target prompt, the source color and texture are not well preserved (i.e., <em>dominated by the prompt</em>), due to the inaccurate correspondences in CharaConsist and semantic confusion in the <em>w/o</em> RoPE setting. (f) Our method better preserves the source appearance while faithfully following the target prompt.
             </p>
           </div>
           
@@ -236,7 +236,7 @@
           </div>
           <div class="content has-text-justified">
             <p>
-              Figure 3: Analysis of attention maps <em>w/</em> and <em>w/o</em> RoPE during attention sharing. (a) The source image is generated from the prompt <code>"a woman is hugging a horse."</code> (b) The target image is generated from <code>"a woman is fondling a horse."</code> using the default FLUX settings. (c) We select a query vector [Q<sub>img</sub>]<sub>i,j</sub> at position (i,j) in the target image. (d) and (e) show the attention maps computed between this query vector and the source image, serving as the key. For clarity, we omit the subscript “img” in the figure and use RoPE(&middot;) instead of RoPE(&middot;,i,j) as a simplified notation. In (d), with RoPE injected, attention is localized to spatially adjacent regions. In (e), without RoPE, attention correctly identifies semantically corresponding regions. (f) and (g) show the target images generated using attention sharing <em>w/</em> and <em>w/o</em> RoPE, respectively.
+              <b>Figure 3:</b> Analysis of attention maps <em>w/</em> and <em>w/o</em> RoPE during attention sharing. (a) The source image is generated from the prompt <code>"a woman is hugging a horse."</code> (b) The target image is generated from <code>"a woman is fondling a horse."</code> using the default FLUX settings. (c) We select a query vector [Q<sub>img</sub>]<sub>i,j</sub> at position (i,j) in the target image. (d) and (e) show the attention maps computed between this query vector and the source image, serving as the key. For clarity, we omit the subscript “img” in the figure and use RoPE(&middot;) instead of RoPE(&middot;,i,j) as a simplified notation. In (d), with RoPE injected, attention is localized to spatially adjacent regions. In (e), without RoPE, attention correctly identifies semantically corresponding regions. (f) and (g) show the target images generated using attention sharing <em>w/</em> and <em>w/o</em> RoPE, respectively.
             </p>
           </div>
           <p>
@@ -247,18 +247,88 @@
     </div>
     <!--/ The Attention Collapse Problem -->
 
+    <!-- The Attention Synergy Approach -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">The Attention Synergy Approach</h2>
+        <div class="content has-text-justified">
+          <p>
+            To tackle the challenge of determining <em>when</em> and <em>how</em> to apply positional embeddings effectively, we propose the <em>SynPS</em> method, which modulates <em>Syn</em>ergy between <em>P</em>ositional embedding and <em>S</em>emantics in Attention for complex non-rigid image editing.
+          </p>
+          <div style="text-align: center;">
+            <img src="./static/algorithm.png" alt="Algorithm 1" style="width: 60%; margin-top: 20px;" />
+          </div>
+          <p>
+            To determine when to apply positional embeddings, we introduce a metric to quantify the editing magnitude. We compute the cosine similarity between the source and target attention outputs for both text tokens (S<sup>l</sup><sub>txt,t</sub>) and image tokens (S<sup>l</sup><sub>img,t</sub>) at each block l and timestep t. S<sup>l</sup><sub>txt,t</sub> inversely reflects the desired semantic change, while S<sup>l</sup><sub>img,t</sub> measures the current visual alignment. We define the overall <em>editing measurement</em> M<sub>t</sub> as the average ratio of these similarities across L blocks:
+          </p>
+          <div style="overflow-x: auto; text-align: center; margin: 20px 0;">
+            <p>
+              M<sub>t</sub> = (1/L) &sum;<sub>l=1</sub><sup>L</sup> (S<sup>l</sup><sub>img,t</sub> / S<sup>l</sup><sub>txt,t</sub>).
+            </p>
+          </div>
+          <p>
+            Intuitively, when this ratio is large, the generated target image might diverge too much from the textual instruction, indicating under-editing, while a small ratio implies over-editing of unfaithful fidelity to the source image.
+          </p>
+          <p>
+            Then, we propose an attention synergy pipeline that dynamically adjusts the effect of position embeddings according to the stepwise editing measurement. We exploit the property of RoPE, which encodes relative displacement between tokens. We introduce a scaling factor w &in; [0, 1] applied to the position IDs of query and key tokens, effectively scaling the rotation angles and the relative distance. This creates a continuous spectrum of control: w=1 preserves full positional constraints to prevent deformation, while w=0 renders attention position-agnostic to allow semantic changes.
+          </p>
+          <p>
+            The weight w is adaptively determined by the editing measurement M<sub>t+1</sub> via a piecewise linear function:
+          </p>
+          <div style="overflow-x: auto; text-align: center; margin: 20px 0;">
+            <p>
+              w = { 0, if M<sub>t+1</sub> > M<sub>max</sub>; 1, if M<sub>t+1</sub> < M<sub>min</sub>; (M<sub>max</sub> - M<sub>t+1</sub>)/(M<sub>max</sub> - M<sub>min</sub>), otherwise }
+            </p>
+          </div>
+          <p>
+            Specifically, when M<sub>t+1</sub> is high (indicating under-editing), we relax positional constraints (w &rarr; 0) to facilitate semantic adherence; conversely, when M<sub>t+1</sub> is low, we enforce structure (w &rarr; 1) to avoid over-editing.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ The Attention Synergy Approach -->
+
     <!-- Results -->
     <div class="columns is-centered">
       <div class="column is-full-width">
         <h2 class="title is-3">Results</h2>
         <div class="content has-text-justified">
           <p>
-            Show your qualitative and quantitative results here.
+            We compare SynPS with state-of-the-art training-free methods including RF-Solver-Edit, FlowEdit, StableFlow, FreeFlux, and CharaConsist.
           </p>
+          <div style="text-align: center;">
+            <img src="./static/comparison.png" alt="Qualitative Comparison" style="width: 100%; margin-bottom: 20px;" />
+            <p style="text-align: justify;">
+              <b>Figure 4:</b> Visual comparison with state-of-the-art methods.
+            </p>
+          </div>
+          <div style="text-align: center; margin-top: 40px;">
+            <img src="./static/quantitative.png" alt="Quantitative Results" style="width: 100%;" />
+            <p style="text-align: justify;">
+              <b>Table 1:</b> Quantitative comparison.
+            </p>
+          </div>
         </div>
       </div>
     </div>
     <!--/ Results -->
+
+    <!-- Analysis -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Analysis</h2>
+        <div class="content has-text-justified">
+          <div style="text-align: center;">
+            <img src="./static/interpolate.png" alt="Interpolation of the attention sharing weight" style="width: 100%;" />
+            <p style="text-align: justify;">
+              <b>Figure 5:</b> Intermediate results during the interpolation of the attention sharing weight <em>w</em> between 1 and our <em>SynPS</em> weights. As <em>w</em> decreases from 1 to our weights, the target image gradually stops replicating the structure of the source image, while still preserving its semantic features and adhering to the prompt guidance.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!--/ Analysis -->
 
   </div>
 </section>

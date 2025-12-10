@@ -85,17 +85,30 @@
           <h1 class="title is-1 publication-title">The Devil is in the Cross-Attention: Improving Complex Non-rigid Image Editing Faithfulness via Attention Synergy</h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              <a href="#">Author Name 1</a><sup>1</sup>,</span>
+              <a href="#">Zhuo Chen</a><sup>1, *</sup>,</span>
             <span class="author-block">
-              <a href="#">Author Name 2</a><sup>1</sup>,</span>
+              <a href="https://wfanyue.github.io/">Fanyue Wei</a><sup>2, *</sup>,</span>
             <span class="author-block">
-              <a href="#">Author Name 3</a><sup>2</sup>,
+              <a href="#">Runze Xu</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://lijin118.github.io/">Jingjing Li</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=inRIcS0AAAAJ&hl=zh-CN">Lixin Duan</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://www.comp.nus.edu.sg/~ayao/">Angela Yao</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="https://wenli-vision.github.io/">Wen Li</a><sup>1, &dagger;</sup>
             </span>
           </div>
 
           <div class="is-size-5 publication-authors">
-            <span class="author-block"><sup>1</sup>University 1,</span>
-            <span class="author-block"><sup>2</sup>University 2</span>
+            <span class="author-block"><sup>1</sup>University of Electronic Science and Technology of China,</span>
+            <span class="author-block"><sup>2</sup>National University of Singapore</span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>*</sup>Equal contribution</span>
+            <span class="author-block"><sup>&dagger;</sup>Corresponding author</span>
           </div>
 
           <div class="column has-text-centered">
@@ -119,16 +132,6 @@
                   <span>arXiv</span>
                 </a>
               </span>
-              <!-- Video Link. -->
-              <span class="link-block">
-                <a href="#"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-youtube"></i>
-                  </span>
-                  <span>Video</span>
-                </a>
-              </span>
               <!-- Code Link. -->
               <span class="link-block">
                 <a href="#"
@@ -137,16 +140,6 @@
                       <i class="fab fa-github"></i>
                   </span>
                   <span>Code</span>
-                  </a>
-              </span>
-              <!-- Dataset Link. -->
-              <span class="link-block">
-                <a href="#"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="far fa-images"></i>
-                  </span>
-                  <span>Data</span>
                   </a>
               </span>
             </div>
@@ -161,17 +154,14 @@
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-      <!-- <video id="teaser" autoplay muted loop playsinline height="100%">
-        <source src="./static/videos/teaser.mp4"
-                type="video/mp4">
-      </video> -->
-      <div style="text-align: center; padding: 50px; background: #f5f5f5; border-radius: 10px;">
-        <p>Place your teaser image or video here.</p>
-        <img src="./static/images/interpolate_start.jpg" alt="Teaser placeholder" style="max-width: 50%; margin: auto;">
+      <div style="text-align: center;">
+        <img src="./static/teaser_arxiv.png" alt="Teaser Image" style="width: 100%;" />
       </div>
-      <h2 class="subtitle has-text-centered">
-        <span class="dnerf">Attention Synergy</span> improves complex non-rigid image editing faithfulness.
-      </h2>
+      <div class="content has-text-justified">
+        <p>
+          The editing results produced by our proposed attention synergy mechanism, <strong>SynPS</strong>. Our method achieves complex training-free non-rigid edits, including challenging tasks such as animal and human pose transformations, image layout transformations, object interactions, and even fine-grained typography editing. The source images are highlighted by red bounding boxes.
+        </p>
+      </div>
     </div>
   </div>
 </section>
@@ -201,29 +191,19 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            This is the abstract for "The Devil is in the Cross-Attention".
+            Training-free image editing with large diffusion models has become practical, yet faithfully performing complex non-rigid edits (e.g., pose or shape changes) remains highly challenging. We identify a key underlying cause: <em>attention collapse</em> in existing attention sharing mechanisms, where either positional embeddings or semantic features dominate visual content retrieval, leading to over-editing or under-editing.
           </p>
           <p>
-            Please replace this text with the actual abstract of your paper.
-            Describe the problem of complex non-rigid image editing, the issues with current methods (e.g., faithfulness),
-            and how your proposed "Attention Synergy" method addresses these challenges.
+            To address this issue, we introduce <strong>SynPS</strong>, a method that <strong>Syn</strong>ergistically leverages <strong>P</strong>ositional embeddings and <strong>S</strong>emantic information for faithful non-rigid image editing. We first propose an editing measurement that quantifies the required editing magnitude at each denoising step. Based on this measurement, we design an attention synergy pipeline that dynamically modulates the influence of positional embeddings, enabling SynPS to balance semantic modifications and fidelity preservation.
+          </p>
+          <p>
+            By adaptively integrating positional and semantic cues, SynPS effectively avoids both over- and under-editing. Extensive experiments on public and newly curated benchmarks demonstrate the superior performance and faithfulness of our approach.
           </p>
         </div>
       </div>
     </div>
     <!--/ Abstract. -->
 
-    <!-- Paper video. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Video</h2>
-        <div class="publication-video">
-          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
-                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        </div>
-      </div>
-    </div>
-    <!--/ Paper video. -->
   </div>
 </section>
 
@@ -231,19 +211,41 @@
 <section class="section">
   <div class="container is-max-desktop">
 
-    <!-- Method Overview -->
+    <!-- The Attention Collapse Problem -->
     <div class="columns is-centered">
       <div class="column is-full-width">
-        <h2 class="title is-3">Method</h2>
+        <h2 class="title is-3">The Attention Collapse Problem</h2>
         <div class="content has-text-justified">
           <p>
-            Describe your method here. You can use images or videos to illustrate the pipeline.
+            Intuitively, applying attention sharing indiscriminately across all layers and denoising steps inevitably leads to duplication issues dominated by the source image.
           </p>
-          <!-- <img src="./static/images/method_diagram.jpg" alt="Method Diagram"> -->
+          <p>
+            Existing methods [1, 2] have investigated the use of fixed attention blocks for attention sharing. However, such issues still persist in the edited results due to emphasis on <em>positional embeddings</em>. Meanwhile, [3] adjusts position embeddings based on the correspondence between the source image and the pre-generated target image, where the structure is determined by the target prompt. This often leads to cases where the source information is entirely neglected due to the reliance on target <em>semantics</em>. This motivates us to investigate the balance between the positional signals of the source and semantics from the target prompt in the attention sharing process.
+          </p>
+          <div style="text-align: center;">
+            <img src="./static/intro.png" alt="Attention Collapse Problem" style="width: 100%; margin-bottom: 20px;" />
+          </div>
+          <div class="content has-text-justified">
+            <p>
+              Figure 2: Qualitative comparison on the editing instruction "upright &rightarrow; white knocked". (b) Initialized with the same noise as the source image, the target image is generated using FLUX with default settings conditioned on the target prompt, thereby fully following the textual instruction. (c) FreeFlux produces noticeable <em>duplicate artifacts</em> and fails to achieve the intended edit. (d) and (e) show the results of CharaConsist and attention sharing w/o RoPE, respectively. Although the overall structure follows the target prompt, the source color and texture are not well preserved (i.e., <em>dominated by the prompt</em>), due to the inaccurate correspondences in CharaConsist and semantic confusion in the <em>w/o</em> RoPE setting. (f) Our method better preserves the source appearance while faithfully following the target prompt.
+            </p>
+          </div>
+          
+          <div style="text-align: center;">
+            <img src="./static/collapse.png" alt="Attention Collapse Analysis" style="width: 100%;" />
+          </div>
+          <div class="content has-text-justified">
+            <p>
+              Figure 3: Analysis of attention maps <em>w/</em> and <em>w/o</em> RoPE during attention sharing. (a) The source image is generated from the prompt <code>"a woman is hugging a horse."</code> (b) The target image is generated from <code>"a woman is fondling a horse."</code> using the default FLUX settings. (c) We select a query vector [Q<sub>img</sub>]<sub>i,j</sub> at position (i,j) in the target image. (d) and (e) show the attention maps computed between this query vector and the source image, serving as the key. For clarity, we omit the subscript “img” in the figure and use RoPE(&middot;) instead of RoPE(&middot;,i,j) as a simplified notation. In (d), with RoPE injected, attention is localized to spatially adjacent regions. In (e), without RoPE, attention correctly identifies semantically corresponding regions. (f) and (g) show the target images generated using attention sharing <em>w/</em> and <em>w/o</em> RoPE, respectively.
+            </p>
+          </div>
+          <p>
+            Attention Analysis. Fig.~\ref{fig:attention_sharing}~(d) reveals that positional embeddings (PE) cause attention collapse, forcing queries to focus on spatially adjacent rather than semantically relevant regions, leading to duplication artifacts. While removing PE enables correct semantic matching across the image (Fig.~\ref{fig:attention_sharing}~(e)), naively doing so causes new artifacts, such as attribute bleeding (e.g., incorrect color transfer) and prompt-dominated semantic collapse (Fig.~\ref{fig:compare}). Consequently, since editing needs vary, we propose a prompt-adaptive attention sharing mechanism to dynamically modulate the synergy between PE and semantics, replacing fixed strategies.
+          </p>
         </div>
       </div>
     </div>
-    <!--/ Method Overview -->
+    <!--/ The Attention Collapse Problem -->
 
     <!-- Results -->
     <div class="columns is-centered">

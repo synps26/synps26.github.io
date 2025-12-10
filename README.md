@@ -1,12 +1,12 @@
-# The Devil is in the Cross-Attention: Improving Complex Non-rigid Image Editing Faithfulness via Attention Synergy
+# The Devil is in Attention Sharing: Improving Complex Non-rigid Image Editing Faithfulness via Attention Synergy
 
-This is the repository that contains source code for the **Attention Synergy** project page.
+This is the repository that contains source code for the **SynPS** project page.
 
 If you find this work useful for your research, please cite:
 ```
 @article{author2026attention,
   author    = {Author, One and Author, Two},
-  title     = {The Devil is in the Cross-Attention: Improving Complex Non-rigid Image Editing Faithfulness via Attention Synergy},
+  title     = {The Devil is in Attention Sharing: Improving Complex Non-rigid Image Editing Faithfulness via Attention Synergy},
   journal   = {arXiv preprint},
   year      = {2026},
 }

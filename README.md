@@ -4,11 +4,14 @@ This is the repository that contains source code for the **SynPS** project page.
 
 If you find this work useful for your research, please cite:
 ```
-@article{author2026attention,
-  author    = {Author, One and Author, Two},
-  title     = {The Devil is in Attention Sharing: Improving Complex Non-rigid Image Editing Faithfulness via Attention Synergy},
-  journal   = {arXiv preprint},
-  year      = {2026},
+@misc{chen2025devilattentionsharingimproving,
+  title={The Devil is in Attention Sharing: Improving Complex Non-rigid Image Editing Faithfulness via Attention Synergy},
+  author={Zhuo Chen and Fanyue Wei and Runze Xu and Jingjing Li and Lixin Duan and Angela Yao and Wen Li},
+  year={2025},
+  eprint={2512.14423},
+  archivePrefix={arXiv},
+  primaryClass={cs.CV},
+  url={https://arxiv.org/abs/2512.14423},
 }
 ```
 

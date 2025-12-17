@@ -1,6 +1,6 @@
 # The Devil is in Attention Sharing: Improving Complex Non-rigid Image Editing Faithfulness via Attention Synergy
 
-This is the repository that contains source code for the **SynPS** project page.
+This is the repository that contains source code for the **[SynPS project page](https://synps26.github.io/)**.
 
 If you find this work useful for your research, please cite:
 ```

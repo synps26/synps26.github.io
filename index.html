@@ -39,6 +39,14 @@
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
+  <!-- MathJax for LaTeX rendering -->
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+      options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -229,7 +237,9 @@
           </p>
           <div style="overflow-x: auto; text-align: center; margin: 20px 0;">
             <p>
-              M<sub>t</sub> = (1/L) &sum;<sub>l=1</sub><sup>L</sup> (S<sup>l</sup><sub>img,t</sub> / S<sup>l</sup><sub>txt,t</sub>).
+              \[
+              M_t = \frac{1}{L}\sum_{l=1}^{L}\frac{S^{l}_{img,t}}{S^{l}_{txt,t}}.
+              \]
             </p>
           </div>
           <p>
@@ -243,7 +253,14 @@
           </p>
           <div style="overflow-x: auto; text-align: center; margin: 20px 0;">
             <p>
-              w = { 0, if M<sub>t+1</sub> > M<sub>max</sub>; 1, if M<sub>t+1</sub> < M<sub>min</sub>; (M<sub>max</sub> - M<sub>t+1</sub>)/(M<sub>max</sub> - M<sub>min</sub>), otherwise }
+              \[
+              w=
+              \begin{cases}
+              0, & \text{if } M_{t+1} > M_{\max},\\
+              1, & \text{if } M_{t+1} < M_{\min},\\
+              \dfrac{M_{\max}-M_{t+1}}{M_{\max}-M_{\min}}, & \text{otherwise.}
+              \end{cases}
+              \]
             </p>
           </div>
           <p>
@@ -265,13 +282,13 @@
           <div style="text-align: center;">
             <img src="./static/comparison.png" alt="Qualitative Comparison" style="width: 100%; margin-bottom: 20px;" />
             <p style="text-align: justify;">
-              <b>Figure 4:</b> Visual comparison with state-of-the-art methods.
+              <b>Figure 4:</b> Qualitative comparison with state-of-the-art methods.
             </p>
           </div>
           <div style="text-align: center; margin-top: 40px;">
             <img src="./static/quantitative.png" alt="Quantitative Results" style="width: 100%;" />
             <p style="text-align: justify;">
-              <b>Table 1:</b> Quantitative comparison.
+              <b>Table 1:</b> Quantitative comparison with state-of-the-art methods.
             </p>
           </div>
         </div>
